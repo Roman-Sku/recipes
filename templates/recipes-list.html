@@ -1,0 +1,40 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for r in recipes %}
+      <div class="col">
+        <div class="card shadow-sm">
+            <div class="d-flex justify-content-center">
+                <div style="position:absolute;top:10px;left:20px">
+                    {% include 'recipe/category.html' with category=r.category %}
+                </div>
+                <img class="rounded-2 m-2" style="max-height: 230px; max-width: 100%;" src="/media/{{ r.preview_image }}" >
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center py-2">
+                    <span>Время приготовления: </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mx-2" viewBox="0 0 16 16">
+                      <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"></path>
+                      <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"></path>
+                    </svg>
+                    <span>{{ r.time_minutes }} мин.</span>
+                </div>
+                <div class="pb-3">
+                  {% for ingredient in r.ingredients_list %}
+                  	<span class="badge text-bg-info">{{ ingredient }}</span>
+                  {% endfor %}
+                </div>
+              <p class="card-text">{{ r.name }}</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'show-recipe' r.id %}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                  <a href="{% url 'update-recipe' r.id %}" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+      </div>
+    {% endfor %}
+
+</div>

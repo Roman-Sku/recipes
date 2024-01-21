@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    {{ errors }}
+    {% if errors %}
+    	<div class="alert alert-danger">
+            {{ errors }}
+        </div>
+    {% endif %}
+
+	<div class="container py-5" style="width: 350px">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input name="username" required minlength="5" maxlength="100" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input name="email" required minlength="5" maxlength="100" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input name="password1" required type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Подтвердите</label>
+                <input name="password2" required type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    </div>
+{% endblock %}

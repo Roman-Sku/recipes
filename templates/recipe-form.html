@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Создание рецепта{% endblock %}
+
+{% block links %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{{ form.media }}
+{% endblock %}
+
+{% block content %}
+
+	<div class="container py-5">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ recipe_form | crispy }}
+
+            <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+    </div>
+<hr>
+    <div class="container py-5">
+        <form method="post" enctype="multipart/form-data" action="/recipe/create_ingredient">
+            {% csrf_token %}
+
+            {{ ingredient_form | crispy }}
+
+            <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+    </div>
+
+{% endblock %}

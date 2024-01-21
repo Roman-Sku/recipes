@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class=" row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="{{ recipe.preview_image.url }}" class="d-block mx-lg-auto img-fluid rounded-3" style="max-height: 300px; max-width: 500px" alt="Bootstrap Themes" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ recipe.name }}</h1>
+          <h5 class="">Время приготовления: {{ recipe.time_minutes }} мин.</h5>
+          {% include 'recipe/category.html' with category=recipe.category %}
+          <div>
+          
+            <div class="my-2">
+                <div>Ингредиенты</div>
+              {% for ingredient in recipe.ingredients.all %}
+              	<div class="badge bg-secondary">{{ ingredient }}</div>
+              {% endfor %}
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div>
+        {{ recipe.description | safe }}
+    </div>
+
+</div>
+{% endblock %}

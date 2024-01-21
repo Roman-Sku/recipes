@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+
+{#    Лого сайта  #}
+    <a class="navbar-brand" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mx-2" viewBox="0 0 16 16">
+          <path d="M7.646 15.854a.5.5 0 0 0 .708 0L10.207 14H14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3.793zM1 9V6h14v3zm14 1v2a1 1 0 0 1-1 1h-3.793a1 1 0 0 0-.707.293l-1.5 1.5-1.5-1.5A1 1 0 0 0 5.793 13H2a1 1 0 0 1-1-1v-2zm0-5H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zM2 11.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 0-1h-8a.5.5 0 0 0-.5.5m0-4a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11a.5.5 0 0 0-.5.5m0-4a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 0-1h-6a.5.5 0 0 0-.5.5"/>
+        </svg>
+        Мои рецепты
+    </a>
+
+{#      Для мобильной версии  #}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+{#      Главная   #}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+
+{#      Создать заметку   #}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create-recipe' %}">Создать</a>
+        </li>
+
+      {% if user.is_authenticated %}
+
+{#      Выход   #}
+        <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="nav-link" type="submit">Выйти</button>
+            </form>
+        </li>
+
+      {% else %}
+
+{#      Вход   #}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Войти</a>
+        </li>
+
+
+{#      Регистрация   #}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Зарегистрироваться</a>
+        </li>
+
+      {% endif %}
+
+      </ul>
+
+
+{#    Форма поиска (по умолчанию метод GET)   #}
+      <form class="d-flex" action="{#  #}">
+        <input name="search" value="{{ request.GET.search }}"
+               style="width: 400px" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+    </div>
+  </div>
+</nav>
